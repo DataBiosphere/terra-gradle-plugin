@@ -1,0 +1,35 @@
+plugins {
+    id "java-gradle-plugin"
+    id "maven-publish"
+    id "com.github.breadmoirai.github-release" version "2.2.12"
+    id "org.gradle.wrapper-upgrade" version "0.10.1"
+}
+
+group = "com.gradle"
+version = layout.projectDirectory.file("release/version.txt").asFile.text.trim()
+
+repositories {
+    gradlePluginPortal()
+}
+
+dependencies {
+    compileOnly "com.gradle:gradle-enterprise-gradle-plugin:3.9"
+}
+
+gradlePlugin {
+    plugins {
+        terraGradlePlugin {
+            id = "bio.terra.gradle-plugin"
+            displayName = "Common gradle configuration that may be used by Terra repos"
+            description = "Includes Gradle Enterprise configuration for Verily's Gradle Enterprise instance"
+            implementationClass = "bio.terra.gradleplugin.GradlePlugin"
+        }
+    }
+}
+
+tasks.withType(ValidatePlugins).configureEach {
+    failOnWarning = true
+    enableStricterValidation = true
+}
+
+apply from: "$rootDir/gradle/publishing.gradle"

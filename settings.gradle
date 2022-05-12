@@ -1,0 +1,17 @@
+plugins {
+    id 'com.gradle.enterprise' version '3.9'
+    id 'com.gradle.common-custom-user-data-gradle-plugin' version '1.6.5'
+}
+
+def isCI = System.getenv('GITHUB_ACTIONS') != null
+
+gradleEnterprise {
+    server = "https://gradle-enterprise-prod-helm-cluster.api.verily.com"
+    buildScan {
+        capture { taskInputFiles = true }
+        uploadInBackground = !isCI
+        publishAlways()
+    }
+}
+
+rootProject.name = 'terra-gradle-plugin'
