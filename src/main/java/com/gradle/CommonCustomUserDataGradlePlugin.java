@@ -1,4 +1,4 @@
-package bio.terra.gradleplugin;
+package com.gradle;
 
 import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension;
 import com.gradle.scan.plugin.BuildScanExtension;
@@ -12,12 +12,12 @@ import org.gradle.util.GradleVersion;
 
 import javax.inject.Inject;
 
-public class GradlePlugin implements Plugin<Object> {
+public class CommonCustomUserDataGradlePlugin implements Plugin<Object> {
 
     private final ProviderFactory providers;
 
     @Inject
-    public GradlePlugin(ProviderFactory providers) {
+    public CommonCustomUserDataGradlePlugin(ProviderFactory providers) {
         this.providers = providers;
     }
 
@@ -54,7 +54,6 @@ public class GradlePlugin implements Plugin<Object> {
             // including those set in the settings.gradle(.kts)
             settings.getGradle().settingsEvaluated(___ -> {
                 Overrides overrides = new Overrides(providers);
-                overrides.configureGradleEnterprise(gradleEnterprise);
                 overrides.configureBuildCache(buildCache);
             });
         });
@@ -76,13 +75,6 @@ public class GradlePlugin implements Plugin<Object> {
             buildScanEnhancements.apply();
 
             // Build cache configuration cannot be accessed from a project plugin
-
-            // configuration changes applied within this block will override earlier configuration settings,
-            // including those set in the root project's build.gradle(.kts)
-            project.afterEvaluate(___ -> {
-                Overrides overrides = new Overrides(providers);
-                overrides.configureGradleEnterprise(gradleEnterprise);
-            });
         });
     }
 

@@ -1,4 +1,4 @@
-package bio.terra.gradleplugin;
+package com.gradle;
 
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.invocation.Gradle;

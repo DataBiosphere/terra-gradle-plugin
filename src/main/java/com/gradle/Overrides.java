@@ -1,4 +1,4 @@
-package bio.terra.gradleplugin;
+package com.gradle;
 
 import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension;
 import org.gradle.api.provider.ProviderFactory;
@@ -8,16 +8,12 @@ import org.gradle.caching.http.HttpBuildCache;
 import java.time.Duration;
 import java.util.Optional;
 
-import static bio.terra.gradleplugin.Utils.appendPathAndTrailingSlash;
+import static com.gradle.Utils.appendPathAndTrailingSlash;
 
 /**
  * Provide standardized Gradle Enterprise configuration. By applying the plugin, these settings will automatically be applied.
  */
 final class Overrides {
-
-    // system properties to override Gradle Enterprise configuration
-    static final String GRADLE_ENTERPRISE_URL = "gradle.enterprise.url";
-    static final String GRADLE_ENTERPRISE_ALLOW_UNTRUSTED_SERVER = "gradle.enterprise.allowUntrustedServer";
 
     // system properties to override local build cache configuration
     static final String LOCAL_CACHE_DIRECTORY = "gradle.cache.local.directory";
@@ -36,11 +32,6 @@ final class Overrides {
 
     Overrides(ProviderFactory providers) {
         this.providers = providers;
-    }
-
-    void configureGradleEnterprise(GradleEnterpriseExtension gradleEnterprise) {
-        sysPropertyOrEnvVariable(GRADLE_ENTERPRISE_URL, providers).ifPresent(gradleEnterprise::setServer);
-        booleanSysPropertyOrEnvVariable(GRADLE_ENTERPRISE_ALLOW_UNTRUSTED_SERVER, providers).ifPresent(gradleEnterprise::setAllowUntrustedServer);
     }
 
     void configureBuildCache(BuildCacheConfiguration buildCache) {

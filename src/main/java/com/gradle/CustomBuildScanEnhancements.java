@@ -1,4 +1,4 @@
-package bio.terra.gradleplugin;
+package com.gradle;
 
 import com.gradle.scan.plugin.BuildResult;
 import com.gradle.scan.plugin.BuildScanExtension;
@@ -17,12 +17,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import static bio.terra.gradleplugin.Utils.appendIfMissing;
-import static bio.terra.gradleplugin.Utils.execAndCheckSuccess;
-import static bio.terra.gradleplugin.Utils.execAndGetStdOut;
-import static bio.terra.gradleplugin.Utils.isNotEmpty;
-import static bio.terra.gradleplugin.Utils.redactUserInfo;
-import static bio.terra.gradleplugin.Utils.urlEncode;
+import static com.gradle.Utils.appendIfMissing;
+import static com.gradle.Utils.execAndCheckSuccess;
+import static com.gradle.Utils.execAndGetStdOut;
+import static com.gradle.Utils.isNotEmpty;
+import static com.gradle.Utils.redactUserInfo;
+import static com.gradle.Utils.urlEncode;
 
 /**
  * Adds a standard set of useful tags, links and custom values to all build scans published.

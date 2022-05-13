@@ -1,4 +1,4 @@
-package bio.terra.gradleplugin;
+package com.gradle;
 
 import com.gradle.enterprise.gradleplugin.GradleEnterpriseExtension;
 import com.gradle.scan.plugin.BuildScanExtension;
@@ -13,6 +13,7 @@ final class CustomGradleEnterpriseConfig {
 
     void configureGradleEnterprise(GradleEnterpriseExtension gradleEnterprise) {
         gradleEnterprise.setServer("https://gradle-enterprise-prod-helm-cluster.api.verily.com");
+        gradleEnterprise.setAllowUntrustedServer(false);
     }
 
     void configureBuildScanPublishing(BuildScanExtension buildScan) {

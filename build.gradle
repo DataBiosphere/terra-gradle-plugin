@@ -13,16 +13,16 @@ repositories {
 }
 
 dependencies {
-    compileOnly "com.gradle:gradle-enterprise-gradle-plugin:3.9"
+    compileOnly "com.gradle:gradle-enterprise-gradle-plugin:3.10"
 }
 
 gradlePlugin {
     plugins {
-        terraGradlePlugin {
+        commonCustomUserData {
             id = "bio.terra.gradle-plugin"
             displayName = "Common gradle configuration that may be used by Terra repos"
             description = "Includes Gradle Enterprise configuration for Verily's Gradle Enterprise instance"
-            implementationClass = "bio.terra.gradleplugin.GradlePlugin"
+            implementationClass = "com.gradle.CommonCustomUserDataGradlePlugin"
         }
     }
 }
